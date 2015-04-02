@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd" >
+<log4j:configuration>
+
+	<!-- ============================== -->
+	<!-- Append messages to the console -->
+	<!-- ============================== -->
+
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<!-- The default pattern: Date Priority [Category] Message\n -->
+			<param name="ConversionPattern"
+				value="%d{ABSOLUTE} %-5p [%c{1}] %m%n" />
+		</layout>
+		<!-- 
+			<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="error" />
+			<param name="LevelMax" value="error" />
+			</filter>
+		-->
+	</appender>
+
+	<appender name="FILE"
+		class="org.apache.log4j.RollingFileAppender">
+		<param name="maxFileSize" value="100KB" />
+		<param name="maxBackupIndex" value="5" />
+		<param name="File" value="./test.log" />
+		<param name="threshold" value="info" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"
+				value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
+		</layout>
+	</appender>
+
+	<!-- 
+		<appender name="mail" class="org.apache.log4j.net.SMTPAppender">
+		<param name="SMTPHost" value="smtp.myservername.xx" />
+		<param name="From" value="email@fromemail.xx" />
+		<param name="To" value="toemail@toemail.xx" />
+		<param name="Subject" value="[LOG] ..." />
+		<param name="BufferSize" value="1" />
+		<param name="threshold" value="error" />
+		<layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern"
+		value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
+		</layout>
+		</appender>
+	-->
+
+	<logger name="org.hibernate">
+		<level value="info" />
+	</logger>
+
+	<!-- log HQL query parser activity -->
+	<!--  
+		<logger name="org.hibernate.hql.ast.AST">
+		<level value="debug" />
+		</logger>
+	-->
+
+	<!-- log just the SQL -->
+	<!-- 
+		<logger name="org.hibernate.SQL">
+		<level value="debug" />
+		</logger>
+	-->
+
+	<!-- log JDBC bind parameters-->
+	<logger name="org.hibernate.type">
+		<level value="info" />
+	</logger>
+
+	<!-- log schema export/update -->
+	<logger name="org.hibernate.tool.hbm2ddl">
+		<level value="debug" />
+	</logger>
+
+	<!-- log HQL parse trees -->
+	<!-- 
+		<logger name="org.hibernate.hql">
+		<level value="debug" />
+		</logger>
+	-->
+
+	<!-- log cache activity -->
+	<!-- 
+		<logger name="org.hibernate.cache">
+		<level value="debug" />
+		</logger>
+	-->
+
+	<!-- log transaction activity -->
+	<!-- 
+		<logger name="org.hibernate.transaction">
+		<level value="debug" />
+		</logger>
+	-->
+
+	<!-- log JDBC resource acquisition -->
+	<!-- 
+		<logger name="org.hibernate.jdbc">
+		<level value="debug" />
+		</logger>
+	-->
+
+	<!-- enable the following line 
+		if you want to track down connection leakages when using DriverManagerConnectionProvider
+	-->
+	<!-- 
+		<logger name="org.hibernate.connection.DriverManagerConnectionProvider">
+		<level value="trace" />
+		</logger>
+	-->
+	<logger name="hs.beer4all">
+		<level value="debug" />
+	</logger>
+	
+	<root>
+		<level value="error" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+
+</log4j:configuration>
